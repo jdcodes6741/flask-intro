@@ -24,6 +24,10 @@ def start_here():
 @app.route("/hello")
 def say_hello():
     """Say hello and prompt for user's name."""
+    compliment_select = """<select name='name'>"""
+    for compliment in AWESOMENESS:
+      compliment_select += f"<option value='{compliment}'>{compliment}</option>"
+    compliment_select += """</select>"""
 
     return """
     <!doctype html>
@@ -38,11 +42,7 @@ def say_hello():
             What's your name? <input type="text" name="person">
             <input type="submit" value="Submit">
 
-            <select name="name">
-              <option value="awesome">Awesome</option>
-              <option value="ducky">Ducky</option>
-              <option value="wowza">Wowza</option>
-            </select>
+            {}
           </form>
         </div>
         <div>
@@ -59,7 +59,7 @@ def say_hello():
         </div>
       </body>
     </html>
-    """
+    """.format(compliment_select)
 
 
 @app.route("/greet", methods=['POST'])
