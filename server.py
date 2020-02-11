@@ -18,18 +18,21 @@ AWESOMENESS = [
 def start_here():
     """Home page."""
 
-    return "<!doctype html><html>Hi! This is the <a href='/hello'>home page.</a></html>"
+    return """<!doctype html>
+              <html>
+                Hi! This is the <a href='/hello'>home page.</a>
+              </html>"""
 
 
 @app.route("/hello")
 def say_hello():
     """Say hello and prompt for user's name."""
-    compliment_select = """<select name='name'>"""
+    compliment_select = "<select name='name'>"
     for compliment in AWESOMENESS:
       compliment_select += f"<option value='{compliment}'>{compliment}</option>"
-    compliment_select += """</select>"""
+    compliment_select += "</select>"
 
-    return """
+    return f"""
     <!doctype html>
     <html>
       <head>
@@ -42,7 +45,7 @@ def say_hello():
             What's your name? <input type="text" name="person">
             <input type="submit" value="Submit">
 
-            {}
+            {compliment_select}
           </form>
         </div>
         <div>
@@ -59,7 +62,7 @@ def say_hello():
         </div>
       </body>
     </html>
-    """.format(compliment_select)
+    """
 
 
 @app.route("/greet", methods=['POST'])
